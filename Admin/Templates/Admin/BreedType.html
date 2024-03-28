@@ -1,0 +1,102 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breed Type</title>
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container-fluid pt-4 px-2 ">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6" >
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">Add Breed Type</h6>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="sel_cat" name="sel_cat"  required=""
+                            aria-label="Floating label select example">
+                            <option selected>Select</option>
+                            {% for i in datas %}
+                            <option {% if i.id == bdata.subcategory.category_id %}  selected {% endif %} value="{{i.id}}">{{i.category_name}}</option>
+                            {% endfor %}   
+                        </select>
+                        <label for="sel_cat">category</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <select class="form-select" id="sel_sub" name="sel_sub"  required="">
+                            <option>Select</option>
+                        </select>
+                        <label for="floatingSelect">Sub Category</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="Breed Type"  name="txtname" value="{{ bdata.breed_name }}"
+                            placeholder="Breed Type">
+                        <label for="Breed Type">Breed Type</label>
+                    </div>
+                    <div class="form-floating" align="center">
+                        <button type="submit" class="btn btn-outline-success m-2">Success</button>
+                        <button type="reset" class="btn btn-outline-light m-2">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <table align="center"  class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Sl.No</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Breed Type</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        {% for i in data %}
+                        <tbody>
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.subcategory.category.category_name }}</td>
+                            <td>{{ i.subcategory.sub_name }}</td>
+                            <td>{{ i.breed_name }}</td>
+                            <td>
+                                <a href="{% url 'webadmin:Del_breed' i.id %}">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>    
+</form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+            $("#sel_cat").change(function () {
+                var did = $(this).val();
+                var ur = "{% url 'webadmin:Ajax_Category' %}"
+                $.ajax({
+                    url: ur,
+                    data: { cat: did, },
+                    success: function (data) {
+                        $("#sel_sub").html(data);
+                    },
+                });
+            });
+    </script>
+
+</body>
+<br><br>
+</html>
+{% endblock content %}

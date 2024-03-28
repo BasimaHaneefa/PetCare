@@ -1,0 +1,112 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | View Appointment</title>
+    <style>
+      body {
+          font-family: 'Arial', sans-serif;
+          background-color: #ffffff;
+          margin: 0;
+          padding: 0;
+      }
+
+      form {
+          max-width: 1080px;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+          text-align: center;
+          color: #333;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+      }
+
+      th, td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+      }
+
+      th {
+          background-color: #f2f2f2;
+      }
+
+      .a {
+          text-decoration: none;
+          display: inline-block;
+          padding: 8px 16px;
+          margin: 5px;
+          border: 0px solid #333;
+          border-radius: 5px;
+          background-color: #4CAF50;
+          color: #fff;
+      }
+
+      .a:hover {
+          background-color: #9af49e;
+      }
+
+      #back-link {
+          display: block;
+          text-align: center;
+          margin-top: 20px;
+          background-color: #f2f2f2;
+      }
+    </style>
+</head>
+  <body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+      <h3>Boarding Appointments</h3>
+      {% csrf_token %}
+      <table>
+        <tr>
+          <th>Sl.No</th>
+          <th>From Date</th>
+          <th>To Date</th>
+          <th>Pet Boarding</th>
+          <th>Details</th>
+          <th>Booked Date</th>
+          <th>Status</th>
+        </tr>      
+        {% for i in data %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ i.board_fromdate }}</div>
+          <td>{{ i.board_todate }}</td>
+          <td>{{ i.boarding.boarding_name }}</td>
+          <td>{{ i.board_details }}</td>
+          <td>{{ i.board_date }}</td>
+          <td>
+            {% if i.booking_status == '0' %}
+              Not verified 
+            {% elif i.booking_status == '1'  %}
+              Booked ||  <a href="{% url 'webuser:boardingrating' i.boarding.id %}">Rate Now</a>
+            {% else  %}
+              Rejected
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}  
+      </table>   
+      <a class="a" id="back-link" href=""></a>
+    </form>
+  </body>
+</html>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}
+
+

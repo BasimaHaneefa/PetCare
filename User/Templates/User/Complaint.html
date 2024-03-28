@@ -1,0 +1,84 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaint</title>
+    <!-- Add Bootstrap CSS link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <form action="" method="post" id="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="container mt-4">
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <!-- Complaint Form -->
+                        <div class="card p-3 mb-3 shadow">
+                            <h2 class="text-center mb-3">File a Complaint</h2>
+            
+                            <div class="form-group">
+                                <label for="complaintTitle">Title</label>
+                                <input type="text" class="form-control" name="txt" id="complaintTitle" value="{{ datac.complaint_title }}" required>
+                            </div>
+            
+                            <div class="form-group">
+                                <label for="complaintContent">Describe your Complaints</label>
+                                <textarea class="form-control" name="txtname" id="complaintContent" rows="5" required>{{ datac.complaint_content }}</textarea>
+                            </div>
+            
+                            <div class="text-center mt-3">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="reset" class="btn btn-secondary ml-2">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </form>
+
+        <!-- Complaint List -->
+        <div class="mt-5">
+            <h2 class="text-center">Complaint List</h2>
+
+            <div class="list-group">
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        {% for i in data %}
+                            <div class="col-md-6">
+                                <div class="card p-3 mb-3 shadow">
+                                    <div class="list-group-item">
+                                        <h5 class="mb-1">{{ i.complaint_title }}</h5>
+                                        <p class="mb-1">{{ i.complaint_content }}</p>
+                                        <small>Date: {{ i.complaint_date }}</small>
+                                        <br>
+                                        <small>Reply: {{ i.complaint_reply }}</small>
+                                        <br>
+                                        <div class="text-right">
+                                            <a href="{% url 'webuser:Delc' i.id %}" class="btn btn-danger btn-sm">Delete</a>
+                                            <a href="{% url 'webuser:Edtc' i.id %}" class="btn btn-warning btn-sm">Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock content %}

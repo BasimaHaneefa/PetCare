@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users Chatted with Doctor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            /*background-color: #000000; /* fallback color */
+            background-image: url({% static 'Registration/images/doctor.jpg' %});
+            /* The radial gradient serves as a fallback in case the image cannot be loaded or is transparent */
+            background-size: cover; /* Adjusts the background image to cover the entire body */
+            background-repeat: no-repeat; /* Ensures the background image does not repeat */
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #555;
+        }
+        .back-link:hover {
+            color: #333;
+        }
+    </style>
+</head>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br><br><br>
+<body>
+    <div class="container">
+        <h2>Users who have chatted with {{ doctor.doctor_name }}</h2>
+        <ul>
+            {% for user in users %}
+                <tr>
+                    <a href="{% url 'webhospital:chatpage' user.id %}">{{ user.user_name }}</a>&nbsp;||&nbsp;
+                </tr>
+            {% endfor %}
+        </ul>
+        <a  href="{% url 'webhospital:View Doctor List' %}" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>

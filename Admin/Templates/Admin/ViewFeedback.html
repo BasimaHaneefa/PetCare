@@ -1,0 +1,58 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Feedback</title>
+<style>
+    .img1{
+        vertical-align: middle;
+        border-radius: 65px;
+    }
+</style>
+
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    <h2 align="center">User Feedbacks</h2>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="table-responsive">
+                        <table align="center" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Feedback</th>
+                                    <th>Date</th>
+                                    <th>Username</th>
+                                    <th>User Photo</th>
+                                </tr>
+                            </thead>
+                            {% for i in datas %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ i.feedback_content }}</td>
+                                    <td>{{ i.feedback_date }}</td>
+                                    <td>{{ i.user.user_name }}</td>
+                                    <td><img class="img1" src="{{ i.user.user_photo.url }}" width="120" height="120"></td>
+                                </tr>
+                            </tbody>
+                             {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+<br><br>
+{% endblock content %}

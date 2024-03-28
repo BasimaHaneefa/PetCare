@@ -1,0 +1,147 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Details</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        color: #333; /* Choose your desired text color */
+        text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+        margin-bottom: 20px;
+      }
+</style>
+</head>
+<body>
+    <div class="container mt-5" align="center">
+            {% csrf_token %}
+        <!-- Replace table with Bootstrap form -->
+        <form action="" method="post" id="" enctype="multipart/form-data" class="my-4 p-4 rounded shadow col-md-8">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Pet Information</h2>
+        
+            <!-- Breed Name -->
+            <div class="form-group row">
+                <label for="txt_name" class="col-sm-2 col-form-label">Breed Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txt_name" id="" value="{{ petdata.breedtype_name }}" required>
+                </div>
+            </div>
+        
+            <!-- DOB -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">DOB</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="txtdate" id="" value="{{ petdata.pet_dob }}" required>
+                </div>
+            </div>
+        
+            <!-- Gender -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Gender</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="txtgender" id="txtgender_male" value="Male" required>
+                        <label class="form-check-label" for="txtgender_male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="txtgender" id="txtgender_female" value="Female" required>
+                        <label class="form-check-label" for="txtgender_female">Female</label>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Upload Photo -->
+            <div class="form-group row">
+                <label for="filepic" class="col-sm-2 col-form-label">Upload Photo</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control-file" name="filepic" id="" value="{{ petdata.pet_photo }}" required>
+                </div>
+            </div>
+        
+            <!-- Weight -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">Weight</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtw" id="" value="{{ petdata.pet_weight }}" required>
+                </div>
+            </div>
+        
+            <!-- Vaccination Name -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">Vaccination Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtvacc" id="" value="{{ petdata.pet_vaccinename }}">
+                </div>
+            </div>
+        
+            <!-- Vaccination Date -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">Vaccination Date</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="txtv" id="" value="{{ petdata.pet_vaccinedate }}">
+                </div>
+            </div>
+        
+            <!-- Details -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">Details</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtdetails" id="" value="{{ petdata.pet_details }}" required>
+                </div>
+            </div>
+        
+            <!-- Buttons -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+            
+        <!-- Display pet details using Bootstrap cards -->
+        <div class="row mt-5">
+            {% for i in data %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow" style="height: 620px; overflow: hidden;">
+                    <img src="{{i.pet_photo.url}}" class="card-img-top" alt="Pet Photo" style="width: 348px; height: 250px;">
+
+                    <div class="card-body" style="height: 400px; overflow-y: auto;">
+                        <h5 class="card-title">{{ i.breedtype_name }}</h5>
+                        <p class="card-text" align="left">{{ i.pet_dob }}</p>
+                        <p class="card-text" align="left">{{ i.pet_gender }}</p>
+                        <p class="card-text" align="left">{{ i.pet_weight }}</p>
+                        <p class="card-text" align="left">{{ i.pet_vaccinename }}</p>
+                        <p class="card-text" align="left">{{ i.pet_vaccinedate }}</p>
+                        <p class="card-text" align="left">{{ i.pet_details }}</p>
+                        <!-- Add other pet details here -->
+                        
+                    </div>
+                    <div class="card-body" style="height: 90px;">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="{% url 'webuser:Delpet' i.id %}" class="btn btn-danger">Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="{% url 'webuser:Edtpet' i.id %}" class="btn btn-primary">Edit</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock content %}

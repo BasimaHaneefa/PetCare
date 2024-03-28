@@ -1,0 +1,112 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointment</title>
+    <style>
+      body {
+        font-family: 'Arial', sans-serif;
+        background-color: #ffffff;
+        margin: 0;
+        padding: 0;
+      }
+
+      form {
+          max-width: 1080px;
+          margin: 20px auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      h3 {
+          text-align: center;
+          color: #333;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+      }
+
+      th, td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+      }
+
+      th {
+          background-color: #f2f2f2;
+      }
+
+      .a {
+          text-decoration: none;
+          display: inline-block;
+          padding: 8px 16px;
+          margin: 5px;
+          border: 0px solid #333;
+          border-radius: 5px;
+          background-color: #4CAF50;
+          color: #fff;
+      }
+
+      .a:hover {
+          background-color: #9af49e;
+      }
+
+      #back-link {
+          display: block;
+          text-align: center;
+          margin-top: 20px;
+          background-color: #f2f2f2;
+      }
+    </style>
+</head>
+  <body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+      <h3>View Grooming Appointments</h3>
+      {% csrf_token %}
+      <table>
+            <tr>
+              <th>Sl.No</th>
+              <th>Fordate</th>
+              <th>Pet Boarding</th>
+              <th>Grooming Type</th>
+              <th>Details</th>
+              <th>Pet</th>
+              <th>Booked Date</th>
+              <th>Status</div>
+            </tr>
+            {% for i in data %}
+            <tr>
+              <td>{{ forloop.counter }}</td>
+              <td>{{ i.gappointment_fordate }}</td>
+              <td>{{ i.gd.boarding.boarding_name }}</td>
+              <td>{{ i.gd.grooming.grooming_type }}</td>
+              <td>{{ i.gd.gd_details }}</td>
+              <td>{{ i.pet.breedtype_name }}</td>
+              <td>{{ i.gappointment_date }}</td>
+              <td>
+                {% if i.gappointment_status == '0' %}
+                  Not verified 
+                {% elif i.gappointment_status == '1'  %}
+                  Accepted ||  <a href="{% url 'webuser:boardingrating' i.id %}">Rate Now</a>
+                {% else  %}
+                  Rejected
+                {% endif %}
+              </td>
+            </tr>
+            {% endfor %}  
+      </table>
+      <a class="a" id="back-link" href=""></a>
+    </form>
+  </body>
+</html>
+<br>
+{% endblock content %}

@@ -1,0 +1,157 @@
+{%  extends 'Petboarding/HF.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | Staff Details</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        color: #333; /* Choose your desired text color */
+        text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+        margin-bottom: 20px;
+      }
+</style>
+</head>
+<body>
+    <div class="container mt-5" align="center">
+        <!-- Replace table with Bootstrap form -->
+        <form action="" method="post" id="" enctype="multipart/form-data" class="my-4 p-4 rounded shadow col-md-8">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Staff Information</h2>
+
+            <!-- Staff Name -->
+            <div class="form-group row">
+                <label for="txtname" class="col-sm-2 col-form-label text-left">Staff Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtname" id="" title="Name Allows Only Alphabets,Spaces, (.) symbol
+                     and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" required placeholder="Enter your name">
+                </div>
+            </div>
+
+            <!-- Staff Address -->
+            <div class="form-group row">
+                <label for="txtadd" class="col-sm-2 col-form-label text-left">Staff Address</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="txtadd" id="" cols="20" rows="5" required placeholder="Enter your address"></textarea>
+                </div>
+            </div>
+        
+            <!-- Staff Contact -->
+            <div class="form-group row">
+                <label for="txtcont" class="col-sm-2 col-form-label text-left">Staff Contact</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" name="txtcont" id="" pattern="[7-9]{1}[0-9]{9}" 
+                    title="Phone number with 7-9 and remaing 9 digit with 0-9" required placeholder="Enter your contact">
+                </div>
+            </div>
+        
+            <!-- Gender -->
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label text-left">Gender</label>
+                <div class="col-sm-10">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="txtgender" id="txtgender" value="Male" required>
+                        <label class="form-check-label" for="txtgender">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="txtgender" id="txtgender" value="Female" required>
+                        <label class="form-check-label" for="txtgender">Female</label>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Staff Email -->
+            <div class="form-group row">
+                <label for="txtemail" class="col-sm-2 col-form-label text-left">Staff Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" name="txtemail" id="" required title="email must contain @ "  placeholder="example12@gmail.com">
+                </div>
+            </div>
+        
+            <!-- Grooming Type -->
+            <div class="form-group row">
+                <label for="sel_groom" class="col-sm-2 col-form-label text-left">Grooming Type</label>
+                <div class="col-sm-10">
+                    <select name="sel_groom" id="sel_groom" class="form-control" required="">
+                        <option value="">---Select---</option>
+                        {% for i in datag %}
+                        <option value="{{i.id}}">{{i.grooming_type}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Upload Photo -->
+            <div class="form-group row">
+                <label for="filepic" class="col-sm-2 col-form-label text-left">Upload Photo</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="filepic" id="" required>
+                        <label class="custom-file-label" for="filepic">Choose file</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Proof -->
+            <div class="form-group row">
+                <label for="fileproof" class="col-sm-2 col-form-label text-left">Upload Proof</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="fileproof" id="" required>
+                        <label class="custom-file-label" for="fileproof">Choose file</label>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- Buttons -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+        
+        <div class="row mt-5">
+            {% for i in datas %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow" style="height: 578px; width: 300px">
+                    <img src="{{ i.staff_photo.url }}" class="card-img-top" alt="Staff Photo" style="height: 220px; object-fit: cover;">
+        
+                    <div class="card-body" style="max-height: 295px; overflow-y: auto;">
+                        <h5 class="card-title">{{ i.staff_name }}</h5>
+                        <p class="card-text" align="left">{{ i.grooming.grooming_type }}</p>
+                        <p class="card-text" align="left">{{ i.staff_gender }}</p>
+                        <p class="card-text" align="left">{{ i.staff_address }}</p>
+                        <p class="card-text" align="left">{{ i.staff_contact }}</p>
+                        <p class="card-text" align="left">{{ i.staff_email }}</p>
+                        <!-- <p class="card-text" align="left">{{ i.staff_proof }}</p> -->
+                        <!-- Add other details here -->
+                    </div>
+        
+                    <div class="card-footer" style="height: 60px;">
+                        <a href="{% url 'webboarding:Delstaff' i.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+<br>
+{% endblock content %}

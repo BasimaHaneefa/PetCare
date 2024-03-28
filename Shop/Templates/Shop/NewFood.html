@@ -1,0 +1,143 @@
+{%  extends 'Shop/HeadFoots.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | Food Info</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        color: #333; /* Choose your desired text color */
+        text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+        margin-bottom: 20px;
+      }
+</style>
+</head>
+<body>
+    <div class="container mt-5" align="center">
+        {% csrf_token %}
+        <!-- Replace table with Bootstrap form -->
+        <form action="" method="post" id="FoodForm" data-subcategory-url="{% url 'webadmin:Ajax_Category' %}" enctype="multipart/form-data" class="my-4 p-4 rounded shadow col-md-8">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Food Information</h2>
+        
+            <!-- Company Name -->
+            <div class="form-group row">
+                <label for="txtname" class="col-sm-2 col-form-label" align="left">Company Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtname" id="" required>
+                </div>
+            </div>
+
+            <!-- Category -->
+            <div class="form-group row">
+                <label for="sel_cat" class="col-sm-2 col-form-label" align="left">Category</label>
+                <div class="col-sm-10">
+                    <select name="sel_cat" id="sel_cat" class="form-control" required>
+                        <option value="">---Select---</option>
+                        {% for i in datas  %}
+                        <option value="{{i.id}}">{{i.category_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Sub Category -->
+            <div class="form-group row">
+                <label for="sel_sub" class="col-sm-2 col-form-label" align="left">Sub Category</label>
+                <div class="col-sm-10">
+                    <select name="sel_sub" id="sel_sub" class="form-control" required>
+                        <option >---Select----</option>
+                    </select>
+                </div>
+            </div>
+        
+            <!-- Food Rate -->
+            <div class="form-group row">
+                <label for="txtrate" class="col-sm-2 col-form-label" align="left">Food Rate</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtrate" id="" required>
+                </div>
+            </div>
+        
+            <!-- Upload Photo -->
+            <div class="form-group row">
+                <label for="filepic" class="col-sm-2 col-form-label" align="left">Photo</label>
+                <div class="col-sm-10">
+                    <input type="file" class="form-control-file" name="filepic" id="" required>
+                    <small id="photoHelpBlock" class="form-text text-muted">
+                        Please upload a high-quality photo in JPEG or PNG format.
+                    </small>
+                </div>
+            </div>
+        
+            <!-- Content -->
+            <div class="form-group row">
+                <label for="txtcontent" class="col-sm-2 col-form-label" align="left">Content</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="txtcontent" id="" required>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+            
+        <!-- Display Product details using Bootstrap cards -->
+        <div class="row mt-5">
+            {% for i in data %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow" style="height: 470px;width: 300px; overflow: hidden;">
+                    <img src="{{i.food_photo.url}}" class="card-img-top" alt="Food Photo" style="width: 300px; height: 200px;">
+
+                    <div class="card-body" style="height: 400px; overflow-y: auto;">
+                        <h5 class="card-title">{{ i.company_name }}</h5>
+                        <p class="card-text" align="left">{{ i.food_rate }}</p>
+                        <p class="card-text" align="left">{{ i.subc.category.category_name }}</p>
+                        <p class="card-text" align="left">{{ i.subc.sub_name }}</p>
+                        <p class="card-text" align="left">{{ i.food_content }}</p>
+                    </div>
+                    <div class="card-body" style="height: 90px;">
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="{% url 'webshop:Delfood' i.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $("#sel_cat").change(function () {
+            var did = $(this).val();
+            var ur = $("#FoodForm").attr("data-subcategory-url");
+            $.ajax({
+                url: ur,
+                data: { cat: did, },
+                success: function (data) {
+                    $("#sel_sub").html(data);
+                },
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

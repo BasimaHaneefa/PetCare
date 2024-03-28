@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="txtname" id="" value="{{ addata.admin_name }}"></td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td><input type="email" name="txtemail" id="" value="{{ addata.admin_email }}"></td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td><input type="number" name="txtcon" id="" value="{{ addata.admin_cont }}"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="txtpass" id="" value="{{ addata.admin_password }}"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Save">
+                    <input type="reset" value="Cancel">
+                </td>
+            </tr>
+        </table>
+        <br><br>
+        <table border="1" align="center">
+            <tr>
+                <td>Sl.No</td>
+                <td>Name</td>
+                <td>Contact</td>
+                <td>Email</td>
+                <td>Password</td>
+                <td>Action</td>
+            </tr>
+            {% for i in datas %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.admin_name }}</td>
+                <td>{{ i.admin_cont }}</td>
+                <td>{{ i.admin_email }}</td>
+                <td>{{ i.admin_password }}</td>
+                <td>
+                    <a href="{% url 'webadmin:Del_admin' i.id %}">Delete</a>
+                    <a href="{% url 'webadmin:Edt_admin' i.id %}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{% url 'webadmin:HomePage' %}">Back</a>
+    </form>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Pet Boarding</title>
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    <h2 align="center">Rejected Pet Boarding</h2>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="table-responsive">
+                        <table align="center" class="table">
+                        <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Boarding Name</th>
+                                <th>Boarding Address</th>
+                                <th>Boarding Contact</th>
+                                <th>Boarding Email</th>
+                                <th>Boarding District</th>
+                                <th>Boarding Place</th>
+                                <th>Boarding Logo</th>
+                                <th>Boarding Proof</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        {% for i in board %}
+                        <tbody>
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.boarding_name }}</td>
+                                <td>{{ i.boarding_address }}</td>
+                                <td>{{ i.boarding_contact }}</td>
+                                <td>{{ i.boarding_email }}</td>
+                                <td>{{ i.place.district.district_name }}</td>
+                                <td>{{ i.place.place_name }}</td>
+                                <td><img src="{{i.boarding_logo.url}}" width="100" height="100"> </td>
+                                <td><img src="{{ i.boarding_proof.url }}" width="110" height="70"> </td>
+                                <td>
+                                    <a href="{% url 'webadmin:Acc_boarding' i.id %}">Accept</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+<br><br><br><br><br><br><br>
+{% endblock content %}

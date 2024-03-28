@@ -1,0 +1,118 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+  
+        form {
+            max-width: 1080px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+  
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+  
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+  
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+  
+        th {
+            background-color: #f2f2f2;
+        }
+  
+        .a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border: 0px solid #333;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+        }
+  
+        .a:hover {
+            background-color: #9af49e;
+        }
+  
+        #back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #f2f2f2;
+        }
+    </style>
+  
+</head>
+<body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        <h3>View Our Appointments</h3>
+        {% csrf_token %}
+        <table>
+            <tr>
+                <th>Sl.No</th>
+                <th>Fordate</th>
+                <th>Fortime</th>
+                <th>Pet</th>
+                <th>Booked Date</th>
+                <th>Hospital Name</th>
+                <th>Doctor Name</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+
+            {% for i in data %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ i.appointment_fordate }}</td>
+                <td>{{ i.appointment_fortime }}</td>
+                <td>{{ i.pet.breedtype_name }}</td>
+                <td>{{ i.appointment_date }}</td>
+                <td>{{ i.doctor.hospital.hospital_name }}</td>
+                <td>{{ i.doctor.doctor_name }}</td>
+                <td>
+                    {% if i.appointment_status == '0' %}
+                    Not verified 
+                    {% elif i.appointment_status == '1'  %}
+                    Accepted 
+                    {% else  %}
+                    Rejected
+                    {% endif %}
+                </td>
+                <td>
+                    <a class="a" href="{% url 'webuser:Cancel' i.id %}">Cancel</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="a" id="back-link" href=""></a>
+    </form>
+</body>
+</html>
+<br><br><br><br><br><br>
+{% endblock content %}

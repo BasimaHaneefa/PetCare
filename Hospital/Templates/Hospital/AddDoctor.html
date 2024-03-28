@@ -1,0 +1,113 @@
+{% extends 'Hospital/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Doctors</title>
+    <style>
+        /*body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }*/
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        input[type="text"], input[type="number"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"], input[type="reset"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            background-color: #45a049;
+        }
+        .a {
+            color: blue;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<br><br><br><br><br>
+<body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        <h1>Add Doctor</h1>
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Doctor Name</td>
+                <td><input type="text" name="txt_name" id="" required></td>
+            </tr>
+            <tr>
+                <td>Contact Number</td>
+                <td><input type="number" name="txtcontact" id="" required></td>
+            </tr>
+            <tr>
+                <td>Upload Photo</td>
+                <td><input type="file" name="filepic" id="" required></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <div style="text-align: center;">
+                        <input type="submit" value="Save">&nbsp;&nbsp;&nbsp;
+                        <input type="reset" value="Cancel">
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <table>
+        <tr>
+            <th>Sl.No</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Photo</th>
+            <th>Action</th>
+        </tr>
+        {% for i in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.doctor_name }}</td>
+            <td>{{ i.doctor_contact }}</td>
+            <td><img src="{{i.doctor_photo.url}}" width="120" height="120"></td>
+            <td>
+                <a class="a" href="{% url 'webhospital:Deldoctor' i.id %}" style="color: blue;">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+{% endblock content %}

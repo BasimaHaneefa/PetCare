@@ -1,0 +1,92 @@
+{%  extends 'Petboarding/HF.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | Add Gallery</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    h1 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        color: #333; /* Choose your desired text color */
+        text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+        margin-bottom: 20px;
+      }
+      .col-md-4{
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 42px;
+    }
+</style>
+</head>
+<body>
+    <div class="container mt-5" align="center">
+        <!-- Replace table with Bootstrap form -->
+        <form action="" method="post" id="" enctype="multipart/form-data" class="my-4 p-4 rounded shadow col-md-6">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Set Your Gallery</h2>
+        
+            <!-- Upload Photo -->
+            <div class="form-group row">
+                <label for="filepic" class="col-sm-2 col-form-label text-left">Upload Photo</label>
+                <div class="col-sm-10">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="filepic" id="">
+                        <label class="custom-file-label" for="filepic">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Caption -->
+            <div class="form-group row">
+                <label for="txtcaption" class="col-sm-2 col-form-label text-left">Caption</label>
+                <div class="col-sm-10">
+                    <textarea class="form-control" name="txtcaption" id="" cols="20" rows="5"></textarea>
+                </div>
+            </div>
+        
+            <!-- Buttons -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+        
+        <!-- Display gallery using Bootstrap cards -->
+        <div class="row mt-5">
+            {% for i in data %}
+            <div class="col-md-3 mb-4">
+                <div class="card shadow" style="height: 335px; width: 290px; overflow: hidden;">
+                    <img src="{{i.gallery_photo.url}}" class="card-img-top" alt="Gallery Photo" style="width: 290px; height: 232px;">
+        
+                    <div class="card-body">
+                        <h5 class="card-title">{{ i.gallery_caption }}</h5>
+                        <!-- Add other details here -->
+                        
+                    </div>
+                    <div class="card-body" style="height: 80px;">
+                        <a href="{% url 'webboarding:Delgallery' i.id %}" class="btn btn-danger">Delete</a>&nbsp;
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+{% endblock content %}

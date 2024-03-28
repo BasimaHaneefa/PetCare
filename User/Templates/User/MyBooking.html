@@ -1,0 +1,195 @@
+{% extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Arial', sans-serif;
+        }
+        form {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1{
+            color: #333;
+            text-align: center;
+            text-transform: uppercase;
+        }
+        h3 {
+          color: #333;
+          text-transform: uppercase;
+          margin-bottom: 8px;
+          margin-left: 20px; /* Adjust the left margin for positioning */
+          border-bottom: 2px solid #585858; /* Add a bottom border for style */
+          padding-bottom: 5px;
+          text-shadow: 2px 2px 2px #000; /* Add text stroke/outline */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+            text-align: right;
+            white-space: nowrap;
+        }
+        img {
+            border-radius: 6px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        <h1>Booking Details</h1>
+        {% csrf_token %}
+        <h3 align="center">Product</h3>
+        <table border="1" align="center" cellpadding="10">
+          <tr>
+            <th>Sl.No</th>
+            <th>Product Name</th>
+            <th>Rate</th>
+            <th>Shop Name</th>
+            <th>Photo</th>
+            <th>Booked Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.product.product_name}}</td>
+            <td>{{ i.product.product_rate }}</td>
+            <td>{{ i.product.shop.shop_name }}</td>
+            <td><img src="{{i.product.product_photo.url}}" width="120" height="120"></td>
+            <td>{{ i.booking.booking_date }}</td>
+            <td>{{ i.cart_qty }}</td>
+            
+            <td>
+              {% if i.cart_status == '0'  %}
+                Order Placed || <a href="{% url 'webuser:Cancel Booking' i.id %}">Cancel</a>
+              {% elif i.cart_status == '1'  %}
+                  Product Packed 
+                {% elif i.cart_status == '2'  %}
+                  Shipped 
+                {% elif i.cart_status == '3'  %}
+                  Out oF Delivery
+                {% elif i.cart_status == '4'  %}
+                  Completed and <a href="{% url 'webuser:rating' i.id %}">Rate The Item</a>
+                {% elif i.cart_status == '5' %}
+                  Cancelled
+                {% else %}
+                  There is an Issue Occured!
+              {% endif %}  
+            </td>
+          </tr>
+          {% endfor %}
+        </table><br><br>
+
+        <h3 align="center">Food</h3>
+        <table border="1" align="center" cellpadding="10">
+          <tr>
+            <th>Sl.No</th>
+            <th>Food Name</th>
+            <th>Rate</th>
+            <th>Shop Name</th>
+            <th>Photo</th>
+            <th>Booked Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+          {% for i in datafood %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.food.company_name}}</td>
+            <td>{{ i.food.food_rate }}</td>
+            <td>{{ i.food.shop.shop_name }}</td>
+            <td><img src="{{i.food.food_photo.url}}" width="120" height="120"></td>
+            <td>{{ i.booking.booking_date }}</td>
+            <td>{{ i.cart_qty }}</td>
+            
+            <td>
+              {% if i.cart_status == '0'  %}
+              <a href="{% url 'webuser:Cancel Booking' i.id %}">Cancel</a>
+              {% elif i.cart_status == '1'  %}
+                  Product Packed 
+                {% elif i.cart_status == '2'  %}
+                  Shipped 
+                {% elif i.cart_status == '3'  %}
+                  Delivered || <a href="{% url 'webuser:foodrating' i.id %}">Rate The Item</a>
+             {% elif i.cart_status == '5' %}
+               Cancelled
+               {% else %}
+               Order Completed
+             {% endif %}  
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <br><br>
+        <h3 align="center">Pet</h3>
+        <table border="1" align="center" cellpadding="10">
+          <tr>
+            <th>Sl.No</th>
+            <th>Pet Name</th>
+            <th>Rate</th>
+            <th>Shop Name</th>
+            <th>Photo</th>
+            <th>Booked Date</th>
+            <th>Quantity</th>
+            <th>Status</th>
+          </tr>
+          {% for i in datapet %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.pet.breedtype.breed_name}}</td>
+            <td>{{ i.pet.pet_rate }}</td>
+            <td>{{ i.pet.shop.shop_name }}</td>
+            <td><img src="{{i.pet.pet_photo.url}}" width="120" height="120"></td>
+            <td>{{ i.booking.booking_date }}</td>
+            <td>{{ i.cart_qty }}</td>
+            
+            <td>
+              {% if i.cart_status == '0'  %}
+              <a href="{% url 'webuser:Cancel Booking' i.id %}">Cancel</a>
+              {% elif i.cart_status == '1'  %}
+                  Product Packed 
+                {% elif i.cart_status == '2'  %}
+                  Shipped 
+                {% elif i.cart_status == '3'  %}
+                  Delivered 
+             {% elif i.cart_status == '5' %}
+               Cancelled
+               {% else %}
+               Order Completed
+             {% endif %}  
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,67 @@
+{% extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Pet Grooming</title>
+    <style>
+        form {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            margin: 30px auto 0; /* Top margin 200px, center horizontally, no bottom margin */
+        }
+
+        .grooming-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .grooming-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post"  enctype="multipart/form-data">
+        {% for i in datas %}
+        <div class="grooming-card">
+            <div>
+                <img src="{{i.gd_photo.url}}" alt="Pet Photo" width="120" height="120">
+            </div>
+            <div>
+                <p><strong>Grooming Type:</strong> {{ i.grooming.grooming_type }}</p>
+                <p><strong>Details:</strong> {{ i.gd_details }}</p>
+                <div align="center">
+                    <a href="{% url 'webuser:View Gallery' i.id %}">View Gallery</a>&nbsp;&nbsp;
+                    <a href="{% url 'webuser:Grooming Appointment' i.id %}">Book Appointment</a> 
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </form>
+    <br>
+
+</body>
+</html>
+<br>
+{% endblock content %}

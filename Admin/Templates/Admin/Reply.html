@@ -1,0 +1,31 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply User Complaints</title>
+</head>
+<br><br>
+<body>
+    <form action="" method="post" id="" >
+        <h1 align="center">Reply User Complaints</h1>
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>Reply</td>
+                <td><textarea name="txtreply" id="" cols="20" rows="4" ></textarea></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <br><input type="submit" value="Save">&nbsp;&nbsp;&nbsp;
+                    <input type="reset" value="Cancel"><br><br>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+{% endblock content %}

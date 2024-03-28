@@ -1,0 +1,68 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Verification</title>
+    <style>
+        .img1{
+            vertical-align: middle;
+            border-radius: 45px;
+        }
+    </style>
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    <h1 align="center">Shop Verification</h1>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="table-responsive">
+                     <table align="center" class="table">
+                        <thead>
+                        <tr>
+                            <th>Sl.No</th>
+                            <th>Shop Name</th>
+                            <th>Shop Address</th>
+                            <th>Shop Contact</th>
+                            <th>Shop Email</th>
+                            <th>Shop District</th>
+                            <th>Shop Place</th>
+                            <th>Shop Photo</th>
+                            <th>Shop Proof</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        {% for i in datas %}
+                        <tbody>
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.shop_name }}</td>
+                            <td>{{ i.shop_address }}</td>
+                            <td>{{ i.shop_contact }}</td>
+                            <td>{{ i.shop_email }}</td>
+                            <td>{{ i.place.district.district_name }}</td>
+                            <td>{{ i.place.place_name }}</td>
+                            <td><img class="img1" src="{{i.shop_photo.url}}" width="100" height="100"> </td>
+                            <td><img src="{{ i.shop_proof.url }}" width="110" height="70"> </td>
+                            <td><a href="{% url 'webadmin:Acc_shop' i.id %}">Accept</a>
+                                <a href="{% url 'webadmin:Rej_shop' i.id %}">Reject</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                        {% endfor %}
+                     </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</form>
+</body>
+</html>
+{% endblock content %}

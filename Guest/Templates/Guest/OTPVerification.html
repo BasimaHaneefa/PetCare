@@ -1,0 +1,113 @@
+{% extends 'Guest/Header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .form {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 342px;
+            background-color: rgb(255, 255, 255);
+            border-radius: 12px;
+            padding: 20px;
+            /* Adding box shadow */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Adjust the values as needed */
+        }
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: black;
+        }
+        .message {
+            color: rgb(77, 77, 82);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+        .inputs {
+            margin-top: 10px; 
+        }  
+        .inputs input {
+            width: 147px;
+            height: 35px;
+            text-align: center;
+            border: none;
+            border-bottom: 1.5px solid #939393;
+            margin: 0 10px; 
+        }
+        .inputs input:focus { 
+            border-bottom: 1.5px solid rovalblue;
+            outline: none;
+        }
+        .action {
+            margin-top: 24px;
+            padding: 11px 22px;
+            border-radius: 12px;
+            border: none;
+            background-color: rgb(0, 13, 255); /* Change background color to red */
+            color: rgb(246, 246, 246);
+            cursor: pointer;
+            align-self: end;
+            transition: background-color 0.3s ease; /* Smooth transition for the background color */
+        }   
+        .action:hover {
+            background-color: rgb(88, 95, 243); /* Change background color on hover */
+        }  
+    </style>
+</head>
+<br><br>
+<body>
+    <div id="tab" align="center">
+    <form action="" method="post" class="form">
+        {% csrf_token %}
+        <div class="title">OTP</div>
+        <div class="title">Verification Code</div>
+        <p class="message">
+            we have sent a verification code to your email.
+        </p>
+        <div class="inputs">
+            <input type="text" class="numbers-only" name="txtotp" autocomplete="off" required=""  maxlength="6">
+        </div>
+        <div>
+            <input type="submit" class="action" value="Verify Me">
+        </div>
+    </form>
+</div>
+<script>
+    // Get all elements with the class 'numbers-only'
+    var numbersOnlyInputs = document.getElementsByClassName('numbers-only');
+
+    // Loop through each input element
+    for (var i = 0; i < numbersOnlyInputs.length; i++) {
+        // Add event listener for the 'input' event
+        numbersOnlyInputs[i].addEventListener('input', function() {
+            // Remove any non-numeric characters
+            this.value = this.value.replace(/\D/g, '');
+
+            if (this.value.length > 10) {
+                this.value = this.value.slice(0, 10);
+            }
+        });
+
+        numbersOnlyInputs[i].addEventListener('blur', function() {
+            // If the length of the value exceeds 10, set the value to empty
+            
+        }); 
+    }
+</script>
+</body>
+<br><br><br><br><br><br><br><br><br><br><br>
+</html>
+{% if msg %}
+    <script>
+        alert("{{msg}}");
+    </script>
+{% endif %}
+{% endblock content %}

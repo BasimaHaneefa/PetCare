@@ -1,0 +1,115 @@
+{%  extends 'Hospital/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | Profile of Hospital</title>
+    <style>
+        form {
+            max-width: 600px;
+            max-height: 502px;
+            margin: 20px auto; /* Adjusted margin */
+            padding: 15px; /* Adjusted padding */
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h3 {
+            font-size: 28px;
+            color: #fff;
+            background: linear-gradient(218deg, #eee, #f37221bd);
+            display: inline-block;
+            padding: 10px -1px;
+            margin: 11px 0;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust shadow as needed */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adjust shadow as needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px; /* Adjusted margin */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 10px; /* Adjusted padding */
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .img {
+            display: block;
+            margin: 0 auto;
+            border-radius: 0%;
+        }
+
+        .a {
+            display: inline-block;
+            padding: 8px 15px; /* Adjusted padding */
+            margin-top: 15px; /* Adjusted margin */
+            text-align: center;
+            text-decoration: none;
+            color: #fff;
+            background-color: #e95629;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .a:hover {
+            background-color: #f7734b;
+            color: #010101;
+        }
+    </style>
+</head>
+<br><br><br><br>
+<body>
+    <form action="" method="post">
+        <h3>My Profile</h3>
+        <table>
+            <tr>
+                <th colspan="2" style="text-align: center; background-color: mintcream; color: #fff;">
+                    <img class="img" src="{{datas.hospital_logo.url}}" width="200" height="120">
+                </th>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>{{ datas.hospital_name }}</td>
+            </tr>
+            <tr>
+                <td>Address</td>
+                <td>{{ datas.hospital_address }}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{ datas.hospital_contact }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ datas.hospital_email }}</td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <a class="a" href="{% url 'webhospital:HosHome' %}">Back</a>&nbsp;&nbsp;
+                    <a class="a" href="{% url 'webhospital:Edit Profile' %}">Edit Profile</a>&nbsp;&nbsp;
+                    <a class="a" href="{% url 'webhospital:Change Password' %}">Change Password</a>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
+<br>
+{% endblock content %}

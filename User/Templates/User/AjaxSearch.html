@@ -1,0 +1,23 @@
+{% for i in hos %}
+<div class="proerty-th">
+    <div class="col-sm-6 col-md-4 p0">
+        <div class="box-two proerty-item">
+            <div class="item-thumb">
+                <a href="property-1.html"><img src="{{ i.hospital_logo.url }}" class="fixed-image"></a>
+            </div>
+            <div class="item-entry overflow">
+                <h5><a href="property-1.html">{{ i.hospital_name }}</a></h5>
+                <div class="dot-hr"></div>
+                
+                <span class="pull-left"><b>{{ i.hospital_address }}</b></span><br>
+                <span class="pull-left"><b>{{ i.hospital_contact }}</b></span><br><br>
+                <span class="pull-left"><b>{{ i.place.district.district_name }}</b></span><br>
+                <span class="pull-left"><b>{{ i.place.place_name }}</b></span><br>
+                <span class="pull-left"><b>{{ i.hospital_email }}</b></span><br>
+                <a href="{% url 'webuser:View Doctor' i.id %}" class="buy-button">View Doctor</a>
+            </div>
+        </div>
+    </div>
+    &nbsp;&nbsp;&nbsp;
+</div>
+{% endfor %}

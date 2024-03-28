@@ -1,0 +1,109 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARENLOVE | Appointment Booking</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <style>
+      h1 {
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        color: #333; /* Choose your desired text color */
+        text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+        margin-bottom: 20px;
+       }
+       /* Adjust the form width and center it */
+      .custom-form {
+        max-width: 600px; /* Adjust the max-width as needed */
+        margin: auto; /* Center the form */
+       }
+
+      /* Adjust the spacing between form elements */
+      .form-group {
+        margin-bottom: 20px;
+      }
+      /* Custom select style */
+        .custom-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #f8f9fa; /* Background color */
+            border: 1px solid #ced4da; /* Border color */
+            padding: .375rem .75rem; /* Padding */
+            font-size: 1rem; /* Font size */
+            line-height: 1.5; /* Line height */
+            border-radius: .25rem; /* Border radius */
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out; /* Transition */
+        }
+
+        /* Hover style */
+        .custom-select:hover {
+            border-color: #6c757d; /* Border color on hover */
+        }
+
+        /* Focus style */
+        .custom-select:focus {
+            border-color: #80bdff; /* Border color on focus */
+            outline: 0; /* Remove outline */
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Add shadow on focus */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-5" align="center">
+        <!-- Replace table with Bootstrap form -->
+        <form action="" method="post" id="" enctype="multipart/form-data" class="my-4 p-4 rounded shadow custom-form">
+            {% csrf_token %}
+            <h2 class="text-center mb-4">Book an Grooming Appointment</h2>
+        
+            <!-- From date -->
+            <div class="form-group row">
+                <label for="txtdate" class="col-sm-2 col-form-label">Fordate</label>
+                <div class="col-sm-10">
+                    <input type="date" class="form-control" name="txtdate" id="" required>
+                </div>
+            </div>
+
+            <!-- Pet details -->
+            <div class="form-group row">
+                <label for="sel_pet" class="col-sm-2 col-form-label">Pet</label>
+                <div class="col-sm-10">
+                    <select name="sel_pet" id="sel_pet" required="" class="form-control custom-select">
+                        <option value="">---Select---</option>
+                        {% for i in data %}
+                        <option value="{{i.id}}">{{i.breedtype_name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="form-group row">
+                <div class="col-sm-10 offset-sm-2">
+                    <button type="submit" class="btn btn-primary">Book</button>
+                    <button type="reset" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js scripts -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JS (optional, but may be required for certain features) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
+<br><br><br><br><br><br>
+{% endblock content %}

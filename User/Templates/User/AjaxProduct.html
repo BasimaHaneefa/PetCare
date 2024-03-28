@@ -1,0 +1,19 @@
+{% for i in pro %}
+<div class="proerty-th">
+    <div class="col-sm-6 col-md-3 p0">
+        <div class="box-two proerty-item">
+            <div class="item-thumb">
+                <a href="property-1.html"><img src="{{ i.product_photo.url }}" class="fixed-image"></a>
+            </div>
+            <div class="item-entry overflow">
+                <h5><a href="property-1.html">{{ i.product_name }}</a></h5>
+                <div class="dot-hr"></div>
+                <span class="pull-left"><b>{{ i.product_rate }}</b></span><br>
+                <span class="pull-left"><b>Shop:</b></span>
+                <span class="proerty-price pull-right">{{ i.shop.shop_name }}</span><br>
+                <a href="{% url 'webuser:Buyproduct' i.id %}" class="buy-button">Add to Cart</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}

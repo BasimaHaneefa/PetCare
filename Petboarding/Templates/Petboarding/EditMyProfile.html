@@ -1,0 +1,115 @@
+{% extends 'Petboarding/HF.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Boarding Profile</title>
+    <style>
+        form {
+            max-width: 600px;
+            margin: 20px auto; 
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #fff;
+            background: linear-gradient(218deg, #eee, #f37221bd);
+            display: inline-block;
+            padding: 10px -1px;
+            margin: 11px 0;
+            border-radius: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust shadow as needed */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adjust shadow as needed */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .div{
+            text-align: center;
+        }
+        input[type="submit"]{
+            width: calc(50% - 5px); /* Adjusted width for both buttons */
+            display: inline-block;
+            width: 80px;
+            background-color: #5191ff;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px; /* Adjusted margin */
+            
+        }
+        input[type="reset"] {
+            width: calc(50% - 5px); /* Adjusted width for both buttons */
+            display: inline-block;
+            width: 80px;
+            background-color: #bababa;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 10px; /* Adjusted margin */
+            
+        }
+        input[type="submit"]:hover{
+            background-color: #afd3f4;
+        }
+        input[type="reset"]:hover {
+            background-color: #e67575;}
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <h1>Edit Profile</h1>
+        {% csrf_token %}
+        <div>
+            <label for="txtname">Name:</label>
+            <input type="text" name="txtname" id="txtname" value="{{ data.boarding_name }}" required>
+        </div>
+        <div>
+            <label for="txtadd">Address:</label>
+            <textarea name="txtadd" id="txtadd" cols="20" rows="5" required>{{ data.boarding_address }}</textarea>
+        </div>
+        <div>
+            <label for="txtno">Contact:</label>
+            <input type="tel" name="txtno" id="txtno" value="{{ data.boarding_contact }}" required>
+        </div>
+        <div>
+            <label for="txtemail">Email:</label>
+            <input type="email" name="txtemail" id="txtemail" value="{{ data.boarding_email }}" required>
+        </div>
+        <div class="div">
+            <input type="submit" value="Save">
+            <input type="reset" value="Cancel">
+        </div> 
+    </form>
+</body>
+</html>
+{% endblock content %}

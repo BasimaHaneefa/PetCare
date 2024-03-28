@@ -1,0 +1,242 @@
+{%  extends 'Guest/Header.html' %}
+{% load static %}
+{% block content %}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'Registration/fonts/icomoon/style.css' %}">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'Registration/css/bootstrap.min.css' %}">
+    
+    <!-- Style -->
+    <link rel="stylesheet" href="{% static 'Registration/css/style.css' %}">
+
+    <title>Contact Form #6</title>
+    <style>
+        .row {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+            /*align-items: center;*/
+        }
+    </style>
+</head>
+  <body>
+    <div class="content">  
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <h3 class="heading mb-4">Let's travel with the world of pets!</h3>
+                            <p>Why are you hesitating?<br>Complete your registration and build your bussiness mind world in the virtual platform</p>
+                            <p><img src="{% static 'Registration/images/boxer.webp' %}" alt="Image" class="img-fluid"></p>
+                        </div>
+                        <div class="col-md-6"> 
+                            <form class="mb-5" method="post" id="ShopForm" name="contactForm" data-places-url="{% url 'webguest:Ajax_Place' %}" enctype="multipart/form-data" onsubmit="return validateForm()">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control" name="txtname" id="txtname" title="Name Allows Only Alphabets,Spaces, (.) symbol
+                                        and First Letter Must Be Capital Letter" pattern="^[A-Z]+[a-zA-Z ]*$" placeholder="Your name" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <textarea class="form-control" name="txtadd" id="txtadd" cols="20" rows="5" placeholder="Write your address" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <input type="text" class="form-control numbers-only" name="txtcont" id="txtcont" autocomplete="off" pattern="[6-9]{1}[0-9]{9}" 
+                                        title="Phone number with 7-9 and remaing 9 digit with 0-9"  placeholder="Your number" required />
+                                    </div>
+                                </div> 
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <input type="email" class="form-control" name="txtemail" id="txtemail" title="email must contain @ " placeholder="email12@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <select class="form-control" name="sel_district" id="sel_district" required="" placeholder="District">
+                                            <option value="">---District---</option>
+                                            {% for i in disdata %}
+                                                <option value="{{i.id}}">{{i.district_name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <select class="form-control" name="sel_place" id="sel_place" required="">
+                                            <option>---Place----</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <input type="file" class="form-control" name="filepic" id="filepic" placeholder="Choose photo" required>
+                                        <small id="photoHelpBlock" class="form-text text-muted">
+                                            Please upload a high-quality photo in JPEG or PNG format.
+                                        </small>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12 form-group">
+                                        <input type="file" class="form-control" name="fileproof" id="fileproof" placeholder="Choose file" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="txtpass" id="txtpass" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$"
+                                          title="Password must contain at least 8 characters, including at least one number and symbols, one lowercase letter, and one uppercase letter" placeholder="Enter password">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-eye" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <small id="passwordHelpBlock" class="form-text text-muted">
+                                        Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces.
+                                    </small>
+                                    <span id="pass"></span>
+                                </div>
+                                <!--Confirm Password-->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="password" class="form-control" name="confirmpass" id="confirmpass" required placeholder="Confirm password" onchange="chkpwd(this,txtpass)">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="fas fa-eye" id="togglePassword" onclick="togglePasswordVisibility()"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Button -->
+                                <div class="row">
+                                    <div class="col-12">
+                                        <input type="submit" value="Sign Up" class="btn btn-primary rounded-0 py-2 px-4">
+                                        <span class="submitting"></span>
+                                        <input type="reset" value="Cancel" class="btn btn-primary rounded-0 py-2 px-4">
+                                    </div> 
+                                </div>
+                            </form>
+
+                            <div id="form-message-warning mt-4"></div> 
+                            <div id="form-message-success">
+                                Your message was sent, thank you!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <script src="{% static 'Registration/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'Registration/js/popper.min.js' %}"></script>
+    <script src="{% static 'Registration/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'Registration/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'Registration/js/main.js' %}"></script>
+
+    <!-- Include Font Awesome for the eye icon -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+   <script>
+       function togglePasswordVisibility() {
+           var passwordField = document.getElementById("txtpass");
+           var toggleIcon = document.getElementById("togglePassword");
+   
+           if (passwordField.type === "password") {
+               passwordField.type = "text";
+               toggleIcon.classList.remove("fas", "fa-eye");
+               toggleIcon.classList.add("fas", "fa-eye-slash");
+           } else {
+               passwordField.type = "password";
+               toggleIcon.classList.remove("fas", "fa-eye-slash");
+               toggleIcon.classList.add("fas", "fa-eye");
+           }
+       }
+
+       function validateForm() {
+           var passwordField = document.getElementById("txtpass");
+           var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/;
+   
+           if (!pattern.test(passwordField.value)) {
+               alert("Password must contain at least 8 characters, including at least one number, one lowercase letter, and one uppercase letter");
+               return false;
+           }
+   
+           return true;
+       }
+       function chkpwd(txtrp, txtp)
+       {
+           if((txtrp.value)!=(txtp.value))
+           {
+               document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+           }
+       }
+    </script>
+
+    <!-- Add your custom script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+       $("#sel_district").change(function () {
+           var did = $(this).val();
+           var ur = $("#ShopForm").attr("data-places-url");
+           $.ajax({
+               url: ur,
+               data: { dist: did, },
+               success: function (data) {
+                   $("#sel_place").html(data);
+               },
+           });
+       });
+
+       // Get all elements with the class 'numbers-only'
+       var numbersOnlyInputs = document.getElementsByClassName('numbers-only');
+
+       // Loop through each input element
+       for (var i = 0; i < numbersOnlyInputs.length; i++) {
+           // Add event listener for the 'input' event
+           numbersOnlyInputs[i].addEventListener('input', function() {
+               // Remove any non-numeric characters
+               this.value = this.value.replace(/\D/g, '');
+
+               if (this.value.length > 0 && (parseInt(this.value.charAt(0)) < 6 )) {
+                   this.value = '';
+               }
+               if (this.value.length > 10) {
+                   this.value = this.value.slice(0, 10);
+               }
+           });
+
+           numbersOnlyInputs[i].addEventListener('blur', function() {
+               // If the length of the value exceeds 10, set the value to empty
+               
+           }); 
+       }
+    </script>
+
+    {% if msg %}
+        <script>
+            alert("{{msg}}");
+        </script>
+    {% endif %}
+
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,73 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <table border="1" align="center">
+            <tr>
+                <td>From Date</td>
+                <td><input type="date" name="txtdate" id="txtdate" required></td>&nbsp;&nbsp;
+                <td>To Date</td>  
+                <td><input type="date" name="txt_date" id="txt_date" required></td>&nbsp;&nbsp;&nbsp;&nbsp;
+                <td colspan="2" align="center">
+                    <input type="submit" value="Search">
+                </td>
+            </tr>
+        </table>
+        <!-- Recent Sales Start -->
+        <div class="container-fluid pt-4 px-4">
+            <div class="bg-secondary text-center rounded p-4">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Recent Sales</h6>
+                    <a href="{% url 'webadmin:Report' %}">Show All</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table text-start align-middle table-bordered table-hover mb-0">
+                        <thead>
+                            <tr class="text-white">
+                               
+                                <th scope="col">Date</th>
+                                <!-- <th scope="col">Invoice</th> -->
+                                <th scope="col">Customer</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%  for i in booking  %}
+                            <tr>
+                              
+                                <td>{{i.booking_date}}</td>
+                                <!-- <td>INV-0123</td> -->
+                                <td>{{i.user.user_name}}</td>
+                                <td>${{i.totalamount}}</td>
+                                <td>{% if i.payment_status == '0'  %}
+                                    Not Paid
+                                    {% elif i.payment_status == '1'  %}
+                                    Paid
+                                    {% else %}
+                                    Error
+                                    {% endif %}
+                                </td>
+                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                            </tr>
+                          {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Recent Sales End -->
+    </form>
+</body>
+</html>
+{% endblock content %}

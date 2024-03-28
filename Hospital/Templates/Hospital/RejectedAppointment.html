@@ -1,0 +1,119 @@
+{%  extends 'Hospital/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | Rejected Appointment</title>
+    <style>
+       /* body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }*/
+
+        form {
+            max-width: 1300px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border: 0px solid #333;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .a:hover {
+            background-color: #9af49e;
+        }
+
+        #back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<br><br><br><br><br><br>
+<body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        <h3>View Rejected Appointments</h3>
+        {% csrf_token %}
+        <table>
+          <tr>
+            <th>Sl.No</th>
+            <th>Fordate</th>
+            <th>Fortime</th>
+            <th>Booked Date</th>
+            <th>User Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>User Photo</th>
+            <th>Breed Type</th>
+            <th>Pet Photo</th>
+            <th>DOB</th>
+            <th>Weight</th>
+            <th>Doctor Name</th>
+            <th>Action</th>
+          </tr>
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.appointment_fordate }}</td>
+            <td>{{ i.appointment_fortime }}</td>
+            <td>{{ i.appointment_date }}</td>
+            <td>{{ i.user.user_name }}</td>
+            <td>{{ i.user.user_email }}</td>
+            <td>{{ i.user.user_cont }}</td>
+            <td><img src="{{ i.user.user_photo.url }}" width="200" height="120"></td>
+            <td>{{ i.pet.breedtype_name }}</td>
+            <td><img src="{{ i.pet.pet_photo.url }}" width="200" height="120"></td>
+            <td>{{ i.pet.pet_dob }}</td>
+            <td>{{ i.pet.pet_weight }}</td>
+            <td>{{ i.doctor.doctor_name }}</td>
+            <td>
+                <a href="{% url 'webhospital:Accept' i.id %}">Accept</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <a class="a" id="back-link" href=""></a>
+    </form>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

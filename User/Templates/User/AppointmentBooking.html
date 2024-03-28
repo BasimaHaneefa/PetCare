@@ -1,0 +1,136 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARENLOVE | Appointment Booking</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'HosTemp/img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'HosTemp/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/style.css' %}">
+</head>
+<br>
+
+<body>
+    {% if msg %}
+    <script>
+        alert("{{msg}}");
+    </script>
+    {% endif %}
+    <div class="contact-form-main pb-top">
+        <div class="container">
+            <div class="row justify-content-md-end">
+                <div class="col-xl-7 col-lg-7">
+                    <div class="form-wrapper">
+                        <!--Section Tittle  -->
+                        <div class="form-tittle">
+                            <div class="row ">
+                                <div class="col-xl-12">
+                                    <div class="section-tittle section-tittle2 mb-70">
+                                        <h2>Book Appointment for your pet </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--End Section Tittle  -->
+                        <form id="contact-form" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box user-icon mb-30">
+                                        <input type="date" name="txtdate" id="" placeholder="Fordate" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box email-icon mb-30">
+                                        <input type="time" name="txttime" id="" required placeholder="Fortime">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 mb-30">
+                                    <div class="select-itms">
+                                        <select class="form-control" name="sel_pet" id="sel_pet" required="">
+                                            <option value="">Select</option>
+                                            {% for i in data %}
+                                            <option value="{{ i.id }}">{{ i.breedtype_name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="form-box subject-icon mb-30">
+                                        <input type="number" name="subject" placeholder="Contact">
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="submit-info">
+                                        <button class="btn submit-btn2" type="submit">Book Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- shape-dog -->
+                            <div class="shape-dog">
+                                <img src="{% static 'HosTemp/img/gallery/shape1.png' %}" alt="">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- contact left Img-->
+        <div class="from-left d-none d-lg-block">
+            <img src="{% static 'HosTemp/img/gallery/contact_form.png' %}" style="height: 600px;" alt="">
+        </div>
+    </div>
+
+    <!-- JS here -->
+
+    <script src="{% static 'HosTemp/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'HosTemp/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/popper.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'HosTemp/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'HosTemp/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'HosTemp/js/wow.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/animated.headline.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Nice-select, sticky -->
+    <script src="{% static 'HosTemp/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.sticky.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'HosTemp/js/contact.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.form.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/mail-script.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->
+    <script src="{% static 'HosTemp/js/plugins.js' %}"></script>
+    <script src="{% static 'HosTemp/js/main.js' %}"></script>
+</body>
+
+<br><br>
+
+</html>

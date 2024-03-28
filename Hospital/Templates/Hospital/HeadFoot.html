@@ -1,0 +1,159 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>CareNLove | Hospital Home Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'HosTemp/img/favicon.ico' %}">
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'HosTemp/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/fontawesome-all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'HosTemp/css/style.css' %}">
+
+    <style>
+        .h1-a {
+            margin: 0;
+            color: #f11717;
+            font-weight: 600;
+            font-family: "Rajdhani", sans-serif;
+            font-size: 30px;
+        }
+        .span{
+            color: #ffae00;
+            font-family: "Rajdhani", sans-serif;
+            font-size: 25px;
+            font-weight: 700;
+        }
+    </style>    
+</head>
+
+<body>
+    <header>
+        <!--? Header Start -->
+        <div class="header-area header-transparent">
+            <div class="main-header header-sticky">
+                <div class="container-fluid">
+                    <div class="row align-items-center">
+                        <!-- Logo -->
+                        <div class="col-xl-2 col-lg-2 col-md-1">
+                            <div class="logo">
+                                <a href="{% url 'webhospital:HosHome' %}"><img src="{% static 'HosTemp/img/logo/logo.png' %}" alt=""></a><h6 class="h1-a"><span class="span">Care</span>N<span class="span">Love</span></h6>
+                            </div>
+                        </div>
+                        <div class="col-xl-10 col-lg-10 col-md-10">
+                            <div class="menu-main d-flex align-items-center justify-content-end">
+                                <!-- Main-menu -->
+                                <div class="main-menu f-right d-none d-lg-block">
+                                    <nav> 
+                                        <ul id="navigation">
+                                            <li><a href="{% url 'webhospital:HosHome' %}">Home</a></li>
+                                            <li><a href="">Settings</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'webhospital:Profile' %}">My Profile</a></li>
+                                                    <li><a href="{% url 'webhospital:Edit Profile' %}">Edit Profile</a></li>
+                                                    <li><a href="{% url 'webhospital:Change Password' %}">Change Password</a></li>
+                                                </ul>
+                                            </li>
+                                            <li><a href="{% url 'webhospital:Add Doctor' %}">Add Doctors</a></li>
+                                            <li><a href="">User Appointment</a>
+                                                <ul class="submenu">
+                                                    <li><a href="{% url 'webhospital:View User Appointment' %}">View Appointment</a></li>
+                                                    <li><a href="{% url 'webhospital:Accepted Appointment' %}">Accepted</a></li>
+                                                    <li><a href="{% url 'webhospital:Rejected Appointment' %}">Rejected</a></li>
+                                                </ul>
+                                            </li>
+                                            <!-- <li><a href="">Contact</a></li> -->
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="header-right-btn f-right d-none d-lg-block ml-30">
+                                    <a href="{% url 'webhospital:Logout' %}" class="header-btn">Logout</a>
+                                </div>
+                            </div>
+                        </div>   
+                        <!-- Mobile Menu -->
+                        <div class="col-12">
+                            <div class="mobile_menu d-block d-lg-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Header End -->
+    </header>
+
+    {% block content %}
+    {% endblock content %}
+
+    <!-- footer-bottom area -->
+    <footer>
+        <div class="footer-bottom-area">
+            <div class="container">
+                <div class="footer-border">
+                    <div class="row d-flex align-items-center">
+                        <div class="col-xl-12 ">
+                            <div class="footer-copy-right text-center">
+                                <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="" style="color: blue;" target="_blank">CarterWorld</a>
+        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End-->
+    <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+
+    <script src="{% static 'HosTemp/js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <!-- Jquery, Popper, Bootstrap -->
+    <script src="{% static 'HosTemp/js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/popper.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/bootstrap.min.js' %}"></script>
+    <!-- Jquery Mobile Menu -->
+    <script src="{% static 'HosTemp/js/jquery.slicknav.min.js' %}"></script>
+
+    <!-- Jquery Slick , Owl-Carousel Plugins -->
+    <script src="{% static 'HosTemp/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/slick.min.js' %}"></script>
+    <!-- One Page, Animated-HeadLin -->
+    <script src="{% static 'HosTemp/js/wow.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/animated.headline.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.magnific-popup.js' %}"></script>
+
+    <!-- Nice-select, sticky -->
+    <script src="{% static 'HosTemp/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.sticky.js' %}"></script>
+
+    <!-- contact js -->
+    <script src="{% static 'HosTemp/js/contact.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.form.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'HosTemp/js/mail-script.js' %}"></script>
+    <script src="{% static 'HosTemp/js/jquery.ajaxchimp.min.js' %}"></script>
+
+    <!-- Jquery Plugins, main Jquery -->	
+    <script src="{% static 'HosTemp/js/plugins.js' %}"></script>
+    <script src="{% static 'HosTemp/js/main.js' %}"></script>
+        
+</body>
+</html>

@@ -1,0 +1,273 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>CareNLove | Search Pet</title>
+        <meta name="description" content="GARO is a real-estate template">
+        <meta name="author" content="Kimarotec">
+        <meta name="keyword" content="html5, css, bootstrap, property, real-estate theme , bootstrap template">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,800' rel='stylesheet' type='text/css'>
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+        <link rel="stylesheet" href="{% static 'Search/assets/css/normalize.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/fontello.css' %}">
+        <link href="{% static 'Search/assets/fonts/icon-7-stroke/css/pe-icon-7-stroke.css' %}" rel="stylesheet">
+        <link href="{% static 'Search/assets/fonts/icon-7-stroke/css/helper.css' %}" rel="stylesheet">
+        <link href="{% static 'Search/assets/css/animate.css' %}" rel="stylesheet" media="screen">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/bootstrap-select.min.css' %}"> 
+        <link rel="stylesheet" href="{% static 'Search/bootstrap/css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/icheck.min_all.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/price-range.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/owl.carousel.css' %}">  
+        <link rel="stylesheet" href="{% static 'Search/assets/css/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/owl.transitions.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'Search/assets/css/responsive.css' %}">
+
+        <style>
+            .form-ddl{
+                width:240px;
+                height: 40px;
+                padding:5px;
+                background: rgba(252, 252, 252, 0.35);
+                color: grey;
+                border: 1; 
+                border-radius: 13px;  
+            }
+            .form-ddl1{
+                width:240px;
+                height: 40px;
+                padding:5px;
+                background: rgba(252, 252, 252, 0.35);
+                color: grey;
+                border: 1; 
+                border-radius: 13px;  
+            }
+            .form-ddl:focus-visible {
+                border:none;
+            }
+           .proerty-item {
+              height: 498px;
+              width: 280px;
+              border: 1px solid #ccc;
+              padding: 10px;
+              margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            }
+            .fixed-image {
+                width: 120px;
+                height: 215px;
+            }
+            .buy-button {
+                display: inline-block;
+                margin-top: 10px;
+                padding: 8px 15px;
+                background-color: #007BFF;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 5px;
+                transition: background-color 0.3s ease;
+                font-weight: bold;
+            }
+            .form-group {
+                margin-right: 10px; /* Adjust the spacing between selection boxes */
+            }
+            .buy-button:hover {
+                background-color: #0056b3;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="slider-area" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url({% static 'HosTemp/img/gallery/gallery3.png' %}); background-size: cover; background-position: center;">
+            <div class="slider-content">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                        <h2 style="color: #fff; font-size: 3em; text-align: center; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);">Pet's Searching Just Got So Easy</h2>
+                        <p style="color: #fff; text-align: center;">Search Pets and Buy it from shop!</p>
+                        <br><br>
+                        <div class="search-form wow pulse" data-wow-delay="0.8s">
+                            <form action="" method="post" class="form-inline" id="PetsForm" data-subcategory-url="{% url 'webadmin:Ajax_Category' %}" data-breed-url="{% url 'webshop:Ajax_Breedtype' %}" data-search-url="{% url 'webuser:Ajax_Pet' %}" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn toggle-btn" type="button"><i class="fa fa-bars"></i></button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        
+                                <div class="form-group">
+                                    <select name="sel_cat" id="sel_cat" class="form-ddl1" data-live-search="true" data-live-search-style="begins" title="Category">
+                                        <option value="">---Select---</option>
+                                        {% for i in datas  %}
+                                        <option value="{{i.id}}">{{i.category_name}}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div class="form-group">
+                                    <select name="sel_sub" id="sel_sub" title="Sub Category" class="form-ddl">
+                                        <option>--- Select Subcategory ---</option>
+                                    </select>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;
+                                <div class="form-group">
+                                    <select name="sel_breed" id="sel_breed" title="Breed Type" class="form-ddl">
+                                        <option>--- Select Breed ---</option>
+                                    </select>
+                                </div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <button class="btn search-btn" type="submit"><i class="fa fa-search"></i> </button>
+                        
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- property area -->
+        <div class="content-area home-area-1 recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2>Top Picks</h2>
+                        <p>----------------------------------------------------</p>
+                    </div>
+                </div>
+
+                <div class="row" id="result">
+                    {% for i in data %}
+                    <div class="proerty-th">
+                        <div class="col-sm-6 col-md-4 p0">
+                            <div class="box-two proerty-item">
+                                <div class="item-thumb">
+                                    <a href="property-1.html"><img src="{{ i.pet_photo.url }}" class="fixed-image"></a>
+                                </div>
+                               
+                                <div class="item-entry overflow">
+                                    
+                                    <h5><a href="property-1.html">{{ i.breedtype.breed_name }}</a></h5>
+                                    <div class="dot-hr"></div>
+                                    <span class="pull-left"><b>{{ i.breedtype.subcategory.sub_name }}</b></span><br>
+                                    <span class="pull-left"><b>{{ i.pet_dob }}</b></span><br>
+                                    <span class="pull-left"><b>{{ i.pet_rate }}/-</b></span><br>
+                                    <span class="pull-left"><b>{{ i.pet_description }}</b></span><br>
+                                    <span class="pull-left"><b>Shop:</b></span>
+                                    <span class="proerty-price pull-right">{{ i.shop.shop_name }}</span><br>
+                                    <a href="{% url 'webuser:Buypet' i.id %}" class="buy-button">Add to Cart</a>
+                                </div>
+                            </div>
+                        </div>
+                        &nbsp;&nbsp;&nbsp;
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>  
+        {% if msg %}
+        <script>
+        alert("{{msg}}")
+        window.location = "{% url 'webuser:Search Pet' %}"
+        </script>
+        {%  endif %}
+
+        <script src="{% static 'Search/assets/js/modernizr-2.6.2.min.js' %}"></script>
+
+        <script src="{% static 'Search/assets/js/jquery-1.10.2.min.js' %}"></script> 
+        <script src="{% static 'Search/bootstrap/js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'Search/assets/js/bootstrap-select.min.js' %}"></script>
+        <script src="{% static 'Search/assets/js/bootstrap-hover-dropdown.js' %}"></script>
+
+        <script src="{% static 'Search/assets/js/easypiechart.min.js' %}"></script>
+        <script src="assets/js/jquery.easypiechart.min.js' %}"></script>
+
+        <script src="{% static 'Search/assets/js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'Search/assets/js/wow.js' %}"></script>
+
+        <script src="{% static 'Search/assets/js/icheck.min.js' %}"></script>
+        <script src="{% static 'Search/assets/js/price-range.js' %}"></script>
+
+        <script src="{% static 'Search/assets/js/main.js' %}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script>
+                
+            $("#sel_cat").change(function () {
+                var cat = $(this).val();
+                var subcat = document.getElementById("sel_sub").value
+                var breed = document.getElementById("sel_breed").value
+                var ur = $("#PetsForm").attr("data-subcategory-url");
+                $.ajax({
+                    url: ur,
+                    data: { cat: cat, },
+                    success: function (data) {
+                        $("#sel_sub").html(data);
+                        
+                        var ur = $("#PetsForm").attr("data-search-url");
+                        $.ajax({
+                            url: ur,
+                            data: { search: breed,cat:cat,subcat:subcat },
+                            success: function (data) {
+                                $("#result").html(data);
+                            },
+                        });
+                    },
+                });
+            });
+            $("#sel_sub").change(function () {
+                var subcat = $(this).val();
+                var cat = document.getElementById("sel_cat").value
+                var breed = document.getElementById("sel_breed").value
+                var ur = $("#PetsForm").attr("data-breed-url");
+                $.ajax({
+                    url: ur,
+                    data: { sub: subcat, },
+                    success: function (data) {
+                        $("#sel_breed").html(data);
+
+                        var ur = $("#PetsForm").attr("data-search-url");
+                        $.ajax({
+                            url: ur,
+                            data: { search: breed,cat:cat,subcat:subcat },
+                            success: function (data) {
+                                $("#result").html(data);
+                            },
+                        });
+                    },
+                });
+            });
+            $("#sel_breed").change(function () {
+                var breed = $(this).val();
+                var cat = document.getElementById("sel_cat").value
+                var subcat = document.getElementById("sel_sub").value
+                var ur = $("#PetsForm").attr("data-search-url");
+                $.ajax({
+                    url: ur,
+                    data: { search: breed,cat:cat,subcat:subcat },
+                    success: function (data) {
+                        $("#result").html(data);
+                    },
+                });
+            });
+
+        </script>
+    </body>
+</html>
+{% endblock content%}

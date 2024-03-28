@@ -1,0 +1,99 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Complaint</title>
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    <h2 align="center">New Complaints</h2>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="table-responsive">
+                        <table align="center" class="table">
+                            <thead>
+                            <tr>
+                                <th>Sl.No</th>
+                                <th>Title</th>
+                                <th>Complaint</th>
+                                <th>Date</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            {% for i in datas %}
+                            <tbody>
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.complaint_title }}</td>
+                                <td>{{ i.complaint_content }}</td>
+                                <td>{{ i.complaint_date }}</td>
+                                <td>{{ i.user.user_name }}</td>
+                                <td>{{ i.user.user_email }}</td>
+                                <td>
+                                    {% if i.complaint_status == '0' %}
+                                    <a href="{% url 'webadmin:Reply' i.id %}">Reply</a></td>
+                                    {% elif i.complaint_status == '1' %}
+                                    Replied
+                                    {% else  %}
+                                    Completed
+                                    {% endif %}
+                            </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <h2 align="center">Replied Complaints</h2>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-12">
+                <div class="bg-secondary rounded h-100 p-4">
+                    <div class="table-responsive">
+                        <table align="center" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Title</th>
+                                    <th>Complaint</th>
+                                    <th>Date</th>
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Reply</th>
+                                </tr>
+                            </thead>
+                            {% for i in datas %}
+                            <tbody>
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ i.complaint_title }}</td>
+                                    <td>{{ i.complaint_content }}</td>
+                                    <td>{{ i.complaint_date }}</td>
+                                    <td>{{ i.user.user_name }}</td>
+                                    <td>{{ i.user.user_email }}</td>
+                                    <td>{{ i.complaint_reply }}</td>
+                                </tr>
+                            </tbody>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+{% endblock content %}

@@ -1,0 +1,71 @@
+{%  extends 'Admin/HeadFooter.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>District</title>
+</head>
+<br><br>
+<body>
+<form action="" method="post">
+    {% csrf_token %}
+    <div class="container-fluid pt-4 px-2 ">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6" >
+                <div class="bg-secondary rounded h-100 p-4">
+                    <h6 class="mb-4">District</h6>
+                    
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingPassword"  name="txt_district" value="{{ ddata.district_name }}"
+                            placeholder="District">
+                        <label for="floatingPassword">District</label>
+                    </div>
+                
+                    <div class="form-floating" align="center">
+                        <button type="submit" class="btn btn-outline-success m-2">Success</button>
+                        <button type="reset" class="btn btn-outline-light m-2">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4 justify-content-center">
+            <div class="col-sm-12 col-xl-6">
+                <div class="bg-secondary rounded h-100 p-4">
+                    
+                    <table align="center"  class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Sl.No</th>
+                            <th>Distric Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    
+                        {% for i in data %}
+                        <tbody>
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ i.district_name }}</td>
+                            <td><a href="{% url 'webadmin:Del_district' i.id %}">Delete</a>|
+                                <a href="{% url 'webadmin:Edt_district' i.id %}">Edit</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                        {% endfor %}
+                
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+{% endblock content %}
+

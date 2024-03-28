@@ -1,0 +1,106 @@
+{% extends 'Petboarding/HF.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | View User Appointment</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        form {
+            max-width: 1000px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border: 0px solid #333;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        .a:hover {
+            background-color: #9af49e;
+        }
+
+        #back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<br>
+<body>
+    <form action="" method="post" id="" enctype="multipart/form-data">
+        <h3>Boarding Appointments</h3>
+        {% csrf_token %}
+        <table>
+          <tr>
+            <th>Sl.No</th>
+            <th>From Date</th>
+            <th>To Date</th>
+            <th>Details</th>
+            <th>User Name</th>
+            <th>Contact</th>
+            <th>Action</th>
+          </tr>
+          {% for i in data %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ i.board_fromdate }}</td>
+            <td>{{ i.board_todate }}</td>
+            <td>{{ i.board_details }}</td>
+            <td>{{ i.user.user_name }}</td>
+            <td>{{ i.user.user_cont }}</td>
+            <td>
+                <a class="a" href="{% url 'webboarding:Acc_appointment' i.id %}">Accept</a>
+                <a class="a" href="{% url 'webboarding:Rej_appointment' i.id %}">Reject</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </table>
+        <a class="a" id="back-link" href=""></a>
+    </form>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

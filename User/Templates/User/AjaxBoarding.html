@@ -1,0 +1,33 @@
+{% for i in Board %}
+    <div class="proerty-th">
+        <div class="col-sm-6 col-md-4 p0">
+            <div class="box-two proerty-item">
+                <div class="item-thumb">
+                    <a href="property-1.html"><img src="{{ i.boarding_logo.url }}" class="fixed-image"></a>
+                </div>
+                
+                <div class="item-entry overflow">
+                    
+                    <h5><a href="property-1.html">{{ i.boarding_name }}</a></h5>
+                    <div class="dot-hr"></div>
+                    {% for k in ar %}
+                    {% if k <= a %}
+                    <i class="fas fa-star text-warning"></i>
+                    {% else %}
+                    <i class="fas fa-star star-light mr-1 main_star"></i>
+                    {% endif %}
+                    {% endfor %}
+                    <br>
+                    <span class="pull-left"><b>{{ i.boarding_address }}</b></span><br>
+                    <span class="pull-left"><b>{{ i.boarding_contact }}</b></span><br><br>
+                    <span class="pull-left"><b>{{ i.place.district.district_name }}</b></span><br>
+                    <span class="pull-left"><b>{{ i.place.place_name }}</b></span><br>
+                    <span class="pull-left"><b>{{ i.boarding_email }}</b></span><br>
+                    <a href="{% url 'webuser:View Grooming' i.id %}" class="buy-button">Pet Grooming</a>
+                    <a href="{% url 'webuser:Boarding Appointment' i.id %}" class="buy-button">Petboarding</a>
+                </div>
+            </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;
+    </div>
+{% endfor %}

@@ -1,0 +1,58 @@
+{%  extends 'User/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Doctors</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        h1 {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Choose your desired text color */
+            text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+            margin-bottom: 20px;
+        }
+        .col-md-4{
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 42px;
+        }
+    </style>
+</head>
+<body>
+<div class="row mt-5">
+    {% for i in datas %}
+    <div class="col-md-3 mb-4">
+        <div class="card shadow" style="height: 401px; width: 301px; overflow: hidden;">
+            <img src="{{i.doctor_photo.url}}" class="card-img-top" alt="Doctor Photo" style="width: 301px; height: 232px;">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ i.doctor_name }}</h5>
+                <p class="card-text" align="left">{{ i.doctor_contact }}</p>
+                <!-- Add other pet details here -->
+                
+            </div>
+            <div class="card-body" style="height: 90px;">
+                <a href="{% url 'webuser:Hospital Appointment' i.id %}" class="btn btn-danger">Take Appointment</a>&nbsp;
+                <a href="{% url 'webuser:chatpage' i.id %}" class="btn btn-primary">Chat With</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+{% endblock content %}

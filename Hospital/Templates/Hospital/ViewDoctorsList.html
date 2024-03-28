@@ -1,0 +1,70 @@
+{%  extends 'Hospital/HeadFoot.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareNLove | View Doctors</title>
+    <!-- Add Bootstrap CSS link -->
+    <!-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <style>
+        h1 {
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            color: #333; /* Choose your desired text color */
+            text-shadow: 7px 5px 2px #cdc2c2; /* Add a subtle text shadow */
+            margin-bottom: 20px;
+        }
+        .col-md-4{
+            position: relative;
+            width: 100%;
+            padding-right: 15px;
+            padding-left: 42px;
+        }
+        .a{
+            text-align: center;
+            color:rgb(0, 195, 255);
+            font-size: larger;
+            font-family: cursive;
+        }
+        .a:hover{
+            color: rgb(0, 0, 255);
+        }
+        h5{
+            font-family: cursive;   
+        }
+    </style>
+</head>
+<body>
+    <br><br><br><br><br>
+<div class="row mt-5">
+    {% for i in datas %}
+    <div class="col-md-3 mb-4">
+        <div class="card shadow" style="height: 401px; width: 301px; overflow: hidden;">
+            <img src="{{i.doctor_photo.url}}" class="card-img-top" alt="Doctor Photo" style="width: 301px; height: 232px;">
+
+            <div class="card-body">
+                <h5 class="card-title">{{ i.doctor_name }}</h5>
+                <h5 class="card-text" align="left">{{ i.doctor_contact }}</h5>
+                <!-- Add other pet details here -->
+                
+            </div>
+            <div class="card-body" style="height: 80px;">
+                <a class="a" href="{% url 'webhospital:View user' i.id %}">View Patients</a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Add Bootstrap JS and Popper.js scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
+<br><br><br>
+{% endblock content %}
